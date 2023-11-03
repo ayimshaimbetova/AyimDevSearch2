@@ -15,10 +15,6 @@ def my_login(request):
     return render(request, 'my-login.html')
 
 def home(request):
-
-
-
-
     return render(request, 'index.html', )
 
 
@@ -31,10 +27,6 @@ def createTask(request):
             return redirect('view-task')
 
     context ={'form': form}
-
-
-
-
     return render(request, 'create-task.html', context=context)
 
 
@@ -42,8 +34,34 @@ def viewTasks(request):
     tasks = Task.objects.all()
 
     context ={'tasks': tasks}
-
-
-
-
     return render(request, 'view-task.html', context=context)
+
+
+def updateTask(request, pk):
+    task = Task.objects.get(id=pk)
+    form = TaskForm(instance=task)
+
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('view-task')
+
+    context ={'form': form}
+
+    return render(request, 'update-task.html', context=context)
+
+
+def deleteTask(request, pk):
+    task = Task.objects.get(id=pk)
+
+    if request.method == 'POST':
+        task.delete()
+        return redirect('view-task')
+
+    context={'object':task}
+
+    return render(request, 'delete-task.html', context=context)
+
+
+
