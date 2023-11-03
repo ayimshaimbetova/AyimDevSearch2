@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.http import HttpResponse
+
+from .models import Task
+
+from .forms import TaskForm
 # Create your views here.
 
 
@@ -11,22 +15,35 @@ def my_login(request):
     return render(request, 'my-login.html')
 
 def home(request):
-    
-    clientList = [
-        {
-            'id': '1',
-            'name': 'Ayim Shaim',
-            'profession': 'lazybones',
 
-        },
-        {
-            'id': '2',
-            'name': 'Kira',
-            'profession': 'call-centerer',
 
-        }
 
-    ]
-    context = {'client': clientList}
 
-    return render(request, 'index.html', context = context)
+    return render(request, 'index.html', )
+
+
+def createTask(request):
+    form=TaskForm()
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view-task')
+
+    context ={'form': form}
+
+
+
+
+    return render(request, 'create-task.html', context=context)
+
+
+def viewTasks(request):
+    tasks = Task.objects.all()
+
+    context ={'tasks': tasks}
+
+
+
+
+    return render(request, 'view-task.html', context=context)
