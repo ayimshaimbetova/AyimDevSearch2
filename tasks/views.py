@@ -5,10 +5,28 @@ from django.http import HttpResponse
 
 
 def register(request):
-    return HttpResponse('This is registration page!')
+    return render(request, 'register.html')
 
 def my_login(request):
-    return HttpResponse('this is the ligi page')
+    return render(request, 'my-login.html')
 
 def home(request):
-    return HttpResponse('Home page')
+    
+    clientList = [
+        {
+            'id': '1',
+            'name': 'Ayim Shaim',
+            'profession': 'lazybones',
+
+        },
+        {
+            'id': '2',
+            'name': 'Kira',
+            'profession': 'call-centerer',
+
+        }
+
+    ]
+    context = {'client': clientList}
+
+    return render(request, 'index.html', context = context)
