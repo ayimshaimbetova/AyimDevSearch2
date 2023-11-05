@@ -10,7 +10,8 @@
     <h1>Welcome to The Task Manager</h1>
     <br><br>
 
-    <img src="{% static 'images/cloud.jpg'%}"/>
+    <a href="{%url 'register'%}">Register a user</a>
+
     <br><br>
 
     <a href="{%url 'create-task'%}">Create a task</a>
@@ -20,8 +21,14 @@
 
     <br>
 
+    <br><br>
 
-    <script src="{% static 'js/app.js'%}"></script>
+    <a href="{%url 'my-login'%}">Login here</a>
+
+    <br><br>
+
+
+            <script src="{% static 'js/app.js'%}"></script>
 
 
 </html>

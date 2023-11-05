@@ -3,3 +3,12 @@
 
 <h2>REGISTER page</h2>
 <h4> KIRAAAAAA</h4>
+
+<form method="post" autocomplete="off">
+    {%csrf_token %}
+
+    {{form.as_p}}
+    
+
+    <input type="submit" value="Submit"/>
+</form>
